@@ -6,7 +6,13 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "gcc-8 ./src/3/readbuf.c -o ./build/readbuf && gcc-8 ./src/3/writebuf.c -o ./build/writebuf && gcc-8 ./src/3/share_mem.c -o main",
+      "command": "gcc-8 ./src/3/readbuf.c -o ./build/readbuf && gcc-8 ./src/3/writebuf.c -o ./build/writebuf && gcc-8 ./src/3/share_mem.c -o ./build/main",
+      "problemMatcher": []
+    },
+    {
+      "label": "build 2",
+      "type": "shell",
+      "command": "g++-8 ./src/3/readbuff.cpp -o ./build/readbuff && g++-8 ./src/3/writebuff.cpp -o ./build/writebuff && g++-8 ./src/3/share_mem.cpp -o ./build/main2",
       "problemMatcher": []
     }
   ]

@@ -6,39 +6,32 @@
 #include <sys/sem.h>
 #include <unistd.h>
 
+#define MEM 75
+#define SEM_KEY 76
 #define BUF_SIZE 32
 #define N 8
-#define KEY 75
 
-// union semun {
-//     int val;
-//     struct semid_ds *buf;
-//     unsigned short *array;
-//     struct seminfo *__buf;
-// };
+union semun {
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
+    struct seminfo *__buf;
+};
 
 typedef struct Mem
 {
     size_t total;
     char buf[N][BUF_SIZE];
 } Mem;
-// 设缓冲区大小为N，队头out，队尾in，out、in均是下标表示:
 
-// 初始时，in=out=0
-// 队头队尾的更新用取模操作，out=(out+1)%N，in=(in+1)%N
-// out==in表示缓冲区空，(in+1)%N==out表示缓冲区满
-// 入队que[in]=value;in=(in+1)%N;
-// 出队ret =que[out];out=(out+1)%N;
-// 数据长度 len =( in - out + N) % N
 
 Mem *addr;
 
 int main()
 {
-    int shmid = shmget(76, sizeof(Mem), IPC_CREAT | 0666);
+    int shmid = shmget(MEM, sizeof(Mem), IPC_CREAT | 0666);
     addr = (Mem *)shmat(shmid, NULL, 0);
-    int semid = semget(75, 2, IPC_CREAT | 0666);
-    printf("%d\n", semid);
+    int semid = semget(SEM_KEY, 2, IPC_CREAT | 0666);
 
     union semun arg1;
     arg1.val = N;
