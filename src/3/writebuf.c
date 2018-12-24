@@ -6,12 +6,11 @@
 
 #define BUF_SIZE 32
 #define N 8
-#define FIRST_KEY 100
 
 typedef struct Mem
 {
     size_t total;
-    char buf[8][BUF_SIZE];
+    char buf[N][BUF_SIZE];
 } Mem;
 
 void P(int semid, int index)
@@ -53,18 +52,19 @@ int main()
 
     int i = 0;
     size_t total = -1;
+    printf("exec write\n");
     while (1)
     {
         P(semid, 1);
         total = total == -1 ? m->total : total;
         if (total < BUF_SIZE)
         {
-            fwrite(m->buf[i++], total, 1, fp);
+            fwrite(m->buf[i = (i + 1) % N], total, 1, fp);
             total = 0;
         }
         else
         {
-            fwrite(m->buf[i++], BUF_SIZE, 1, fp);
+            fwrite(m->buf[i = (i + 1) % N], BUF_SIZE, 1, fp);
             total -= BUF_SIZE;
         }
         V(semid, 0);

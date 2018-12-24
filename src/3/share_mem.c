@@ -8,7 +8,6 @@
 
 #define BUF_SIZE 32
 #define N 8
-#define FIRST_KEY 100
 
 // union semun {
 //     int val;
@@ -20,7 +19,7 @@
 typedef struct Mem
 {
     size_t total;
-    char buf[8][BUF_SIZE];
+    char buf[N][BUF_SIZE];
 } Mem;
 // 设缓冲区大小为N，队头out，队尾in，out、in均是下标表示:
 
