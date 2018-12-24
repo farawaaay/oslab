@@ -6,6 +6,7 @@
 
 #define BUF_SIZE 32
 #define N 8
+#define KEY 75
 
 typedef struct Mem
 {
@@ -45,26 +46,29 @@ Mem *m;
 
 int main()
 {
-    int shmid = shmget(IPC_PRIVATE, sizeof(Mem), IPC_CREAT | 0666);
+    int shmid = shmget(76, sizeof(Mem), IPC_CREAT | 0666);
     m = (Mem *)shmat(shmid, NULL, 0);
-    int semid = semget(IPC_PRIVATE, 2, IPC_CREAT | 0666);
-    printf("%d\n", semid);
+    int semid = semget(75, 2, IPC_CREAT | 0666);
     FILE *fp = fopen("./input.txt", "r");
 
     int i = 0;
     size_t total = -1;
     while (1)
     {
-        printf("P\n");
+        printf("P1\n");
         P(semid, 0);
-        printf("P\n");
+        printf("P2\n");
         if (total == -1)
         {
+            printf("ok");
             fseek(fp, 0L, SEEK_END);
+            printf("ok");
             total = m->total = ftell(fp);
             printf("%d", total);
             fseek(fp, 0L, SEEK_SET);
         }
+        printf("ok2");
+
         if (total < BUF_SIZE)
         {
             fread(m->buf[i = (i + 1) % N], total, 1, fp);

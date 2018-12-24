@@ -6,6 +6,7 @@
 
 #define BUF_SIZE 32
 #define N 8
+#define KEY 75
 
 typedef struct Mem
 {
@@ -45,9 +46,10 @@ Mem *m;
 
 int main()
 {
-    int shmid = shmget(IPC_PRIVATE, sizeof(Mem), IPC_CREAT | 0666);
+    int shmid = shmget(76, sizeof(Mem), IPC_CREAT | 0666);
     m = (Mem *)shmat(shmid, NULL, 0);
-    int semid = semget(IPC_PRIVATE, 2, IPC_CREAT | 0666);
+    int semid = semget(75, 2, IPC_CREAT | 0666);
+    printf("%d\n", semid);
     FILE *fp = fopen("./output.txt", "w");
 
     int i = 0;

@@ -8,6 +8,7 @@
 
 #define BUF_SIZE 32
 #define N 8
+#define KEY 75
 
 // union semun {
 //     int val;
@@ -34,9 +35,10 @@ Mem *addr;
 
 int main()
 {
-    int shmid = shmget(IPC_PRIVATE, sizeof(Mem), IPC_CREAT | 0666);
+    int shmid = shmget(76, sizeof(Mem), IPC_CREAT | 0666);
     addr = (Mem *)shmat(shmid, NULL, 0);
-    int semid = semget(IPC_PRIVATE, 2, IPC_CREAT | 0666);
+    int semid = semget(75, 2, IPC_CREAT | 0666);
+    printf("%d\n", semid);
 
     union semun arg1;
     arg1.val = N;
