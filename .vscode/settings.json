@@ -3,6 +3,8 @@
         "sem.h": "c",
         "stdlib.h": "c",
         "string.h": "c",
-        "wait.h": "c"
+        "wait.h": "c",
+        "unistd.h": "c",
+        "grp.h": "c"
     }
 }
