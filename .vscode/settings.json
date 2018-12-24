@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "sem.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "wait.h": "c"
+    }
+}
