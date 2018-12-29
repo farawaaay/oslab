@@ -11,6 +11,7 @@
 void print_dir(char *dirname, u_int depth)
 {
     DIR *dir = opendir(dirname);
+    chdir(dirname);
     struct dirent *d;
     printf("%s:\n", dirname);
     printf("total %d\n", depth);
@@ -41,9 +42,10 @@ void print_dir(char *dirname, u_int depth)
         struct group *grp = getgrgid(s.st_gid);
         char time_s[128];
         strftime(time_s, 128, "%Y-%m-%d %I:%M", localtime(&s.st_ctime));
-        printf("%10s %3d %s %s %6d %s %s\n", mode, s.st_nlink, pwd->pw_name, grp->gr_name, s.st_size, time_s, d->d_name);
+        printf("%10s %3d %s %s %6lld %s %s\n", mode, s.st_nlink, pwd->pw_name, grp->gr_name, s.st_size, time_s, d->d_name);
     }
     closedir(dir);
+    chdir("..");
     printf("\n");
 
     dir = opendir(dirname);
@@ -64,7 +66,7 @@ void print_dir(char *dirname, u_int depth)
     printf("\n");
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    print_dir(".", 0);
+    print_dir(argv[1], 0);
 }
