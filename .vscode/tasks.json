@@ -1,0 +1,19 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "gcc-8 ./src/3/readbuf.c -o ./build/readbuf && gcc-8 ./src/3/writebuf.c -o ./build/writebuf && gcc-8 ./src/3/share_mem.c -o ./build/main",
+      "problemMatcher": []
+    },
+    {
+      "label": "build 2",
+      "type": "shell",
+      "command": "g++-8 ./src/3/readbuff.cpp -o ./build/readbuff && g++-8 ./src/3/writebuff.cpp -o ./build/writebuff && g++-8 ./src/3/share_mem.cpp -o ./build/main2",
+      "problemMatcher": []
+    }
+  ]
+}
